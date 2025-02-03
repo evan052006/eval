@@ -14,7 +14,7 @@ typedef struct node {
 } node;
 
 double eval(char* s) {
-    while (*s != '/0') {
+    while (*s != '\0') {
         if (*s == ' ') continue;
 
         if ('0' <= *s <= '9') {
@@ -37,7 +37,7 @@ double eval(char* s) {
     }
 }
 
-node *createNode(char data) {
+node *createNode(char* data) {
     node *listNode = malloc(sizeof(node));
 
     if (listNode == NULL)
@@ -45,7 +45,7 @@ node *createNode(char data) {
         return NULL;
     }
 
-    listNode->data = data;
+    listNode->data = *data;
     listNode->next = NULL;
 
     return listNode;
@@ -64,12 +64,15 @@ int main() {
     char *equation = "Hello";
     node *list = NULL;
 
-    for (int i = 0; i < 5; i++)
+    char *i = equation;
+    while (*i != '\0')
     {
-        node *temp = createNode(equation[i]);
+        node *temp = createNode(i);
 
         temp->next = list;
         list = temp;
+
+        i++;
     }
 
     node *copy = list;
